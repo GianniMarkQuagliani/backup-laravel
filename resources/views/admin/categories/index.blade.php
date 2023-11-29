@@ -14,11 +14,10 @@
 
             @if (session('success'))
             <div class="alert alert-success" role="alert">
-                @if (session('success'))
+                {{ session('success') }}
             </div>
             @endif
 
-            </div>
             <form action="{{ route('admin.categories.store') }}" method="POST">
             @csrf
             <div class="input-group mb-3">
@@ -28,20 +27,26 @@
             </form>
             <table class="table">
                 <thead>
-                  <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Azioni</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Azioni</th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach ($categories as $category)
-                  <tr>
-                    <td>{{ $category->name }}</td>
-                    <td>X</td>
-                  </tr>
+                    <tr>
+                        <td>{{ $category->name }}</td>
+                        <td>
+                            <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" onsubmit="return confirm('Sei sicuro di voler eliminare?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
-              </table>
+            </table>
         </div>
     </div>
 @endsection

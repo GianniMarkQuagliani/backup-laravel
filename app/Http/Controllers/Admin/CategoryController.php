@@ -38,10 +38,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $exists = Category::where('name', $request->name)->get();
+        $exists = Category::where('name', $request->name)->first();
         if ($exists) {
             return redirect()->route('admin.categories.index')->with('error', 'Categoria già presente');
-        }else {
+       }else {
             $new_category = new Category();
             $new_category->name = $request->name;
             $new_category->slug = Str::slug($request->name, '-');
@@ -91,8 +91,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('admin.categories.index')->with('success', 'Categoria eliminata con successo');
     }
 }
