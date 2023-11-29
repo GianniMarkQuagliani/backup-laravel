@@ -8,7 +8,8 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Titolo</th>
-                <th scope="col">Slug</th>
+                <th scope="col">Data</th>
+                <th scope="col">Tempo di lettura</th>
                 <th scope="col">Azioni</th>
             </tr>
         </thead>
@@ -17,9 +18,10 @@
                 <tr>
                     <td>{{ $post->id }}</td>
                     <td>{{ $post->title }}</td>
-                    <td>{{ $post->slug }}</td>
+                    <td>{{ $post->date }}</td>
+                    <td>{{ $post->reading_time }} min</td>
                     <td>
-                        <a href="#" class="btn btn-primary">Visualizza</a>
+                        <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i>Visualizza</a>
                         <a href="#" class="btn btn-warning">Modifica</a>
                     </td>
                 </tr>
