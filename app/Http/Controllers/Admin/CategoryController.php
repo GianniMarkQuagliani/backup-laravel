@@ -46,6 +46,8 @@ class CategoryController extends Controller
             $new_category->name = $request->name;
             $new_category->slug = Str::slug($request->name, '-');
             $new_category->save();
+            return redirect()->route('admin.categories.index')->with('success', 'Categoria creata con successo');
+
         }
     }
 
