@@ -10,7 +10,11 @@
 </head>
 <body>
 
-    @yield('content')
+    @include('partials.header')
+
+    <div class="container my-5">
+        @yield('content')
+    </div>
 
 </body>
 </html>
